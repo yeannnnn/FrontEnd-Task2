@@ -1,0 +1,92 @@
+<!doctype html>
+<html class="no-js" lang="">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Task B</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="apple-touch-icon" href="apple-touch-icon.png">
+
+    <link rel="stylesheet" href="css/normalize.min.css">
+    <link rel="stylesheet" href="css/main.css">
+
+    <script src="js/vendor/modernizr-2.8.3.min.js"></script>
+</head>
+
+<body>
+<h1>Form validation JavaScript</h1>
+
+<form name="myForm" novalidate onsubmit="return validateForm()">
+    <p><label>First Name:<input type="text" id="first_name" required></label></p>
+    <p><label>Last Name:<input type="text" id="last_name" required></label></p>
+    <p><label>Email:<input type="email" id="email" required></label></p>
+    <p><label>Phone number:<input type="text" id="phone_number"></label></p>
+    <p><label>Address:<input type="text" id="address"></label></p>
+    <p><label>Postal code:<input type="text" id="postal_code"></label></p>
+    <p><label>Password:<input type="password" id="password" required></label></p>
+    <input type="submit">
+</form>
+<script>
+
+  function validateForm() {
+    const fname = document.querySelector('#first_name').value;
+    const lname = document.querySelector('#last_name').value;
+    const email = document.querySelector('#email').value;
+    const phoneNumber = document.querySelector('#phone_number').value;
+    const postalCode = document.querySelector('#postal_code').value;
+    const password = document.querySelector('#password').value;
+
+    const patternFN = /[A-Za-z]/;
+    const resultFN = patternFN.exec(fname);
+    if (resultFN == null) {
+      alert('Please input your first name.');
+      return false;
+    }
+
+    const patternLN = /[A-Za-z]/;
+    const resultLN = patternLN.exec(lname);
+    if (resultLN == null) {
+      alert('Please input your last name.');
+      return false;
+    }
+
+    const patternEm = /[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$/;
+    const resultEm = patternEm.exec(email);
+    if (resultEm == null) {
+      alert('Please input valid email address.');
+      return false;
+    }
+
+    const patternPn = /\+[358]+[0-9]/;
+    const resultPn = patternPn.exec(phoneNumber);
+    if (resultPn == null || phoneNumber.length !== 13) {
+      alert('Please input phone number format as +358401234567.');
+      return false;
+    }
+
+    const patternPc = /[0-9]/;
+    const resultPc = patternPc.exec(postalCode);
+    if (resultPc == null || postalCode.length !== 5) {
+      alert('Please input exactly 5 numbers postal code.');
+      return false;
+    }
+    if (password === '') {
+      alert('Please input password.');
+      return false;
+    }
+    else {
+      alert('Form submitted.');
+      return true;
+    }
+
+  }
+
+
+</script>
+
+<script src="js/main.js"></script>
+</body>
+
+</html>
